@@ -1,0 +1,42 @@
+h1 {
+    color: white;
+    text-align: center;
+}
+
+#main-wrapper {
+    display: grid;
+    grid-template-columns: 25% 75%;
+    border: 1px solid black;
+}
+
+#search, #recent-search, #current-city, #fiveday {
+    border: 1px solid black;
+}
+
+#search-header {
+    margin-left: 5px;
+}
+
+#city {
+    width: 65%;
+}
+#recent-searches button {
+    width: 90%;
+    margin: 3px 5px 3px 5px;
+    border-radius: 5px;
+    border: none;
+    background-color: darkgrey;
+}
+
+#fivedaylist {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#fivedaydiv {
+    margin: 5px;
+    padding: 5px;
+    background-color: dodgerblue;
+    color: white;
+
+}
