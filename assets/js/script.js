@@ -64,7 +64,7 @@ function saveCity() {
 //Get weather data from APIs
 function getAPIData() {
     //Openweather API Url based on city search input
-    geocodingUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + city + '&limit=1&appid=' + weatherApiKey;
+    geocodingUrl = 'https://api.openweathermap.org/geo/1.0/direct?q=' + city + '&limit=1&appid=' + weatherApiKey;
 
     //Get Lat/Lon from geocoding API
     fetch(geocodingUrl)
