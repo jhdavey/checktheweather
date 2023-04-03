@@ -13,7 +13,6 @@ body {
     background-image: url(../images/weather_back3.jpg);
     background-size: cover;
     background-repeat: no-repeat;
-    overflow: hidden;
 }
 
 h1 {
@@ -55,7 +54,7 @@ h4 {
 }
 
 #recent-searches button, #search-button {
-    margin: 3px 0px 8px 0px;
+    margin: 2px 0px 2px 0px;
     padding: 3px;
     border-radius: 5px;
     border: none;
