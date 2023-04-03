@@ -16,36 +16,54 @@ h1 {
 }
 
 h3 {
-    color: dodgerblue;
-    text-decoration: underline;
+    font-size: 20px;
+}
+
+h4 {
+    margin-left: 5px;
+    font-size: 20px;
 }
 
 #main-wrapper {
     display: grid;
-    grid-template-columns: 25% 75%;
+    grid-template-columns: 20% 80%;
 }
 
-#search-header {
-    margin-left: 5px;
+#search {
+    margin: 5px 5px 0px 10px;
+    min-width: 200px;
 }
 
 #city {
-    width: 65%;
+    border: 1px solid black;
+    border-radius: 3px;
+}
+
+#search-header {
+    margin-bottom: 5px;
+    border-bottom: 2px solid dodgerblue;
+}
+
+#city {
+    width: 100%;
     margin-bottom: 10px;
 }
 
-
 #recent-searches button, #search-button {
-    margin: 3px 5px 8px 5px;
+    margin: 3px 0px 8px 0px;
     padding: 3px;
     border-radius: 5px;
     border: none;
-    background-color: dodgerblue;
     color: white;
 }
-
 #recent-searches button {
-    width: 85%;
+    background-color: dodgerblue;
+}
+#search-button {
+    background-color: darkgray;
+}
+button {
+    width: 100%;
 }
 
 #recent-searches button:hover, #search-button:hover {
@@ -55,20 +73,44 @@ h3 {
 #current-city {
     margin: 10px;
     padding: 10px;
+}
+
+#current-city-header {
+    display: flex;
+    align-items: center;
+}
+
+#weather-icon, #forecast-icon {
+    width: 60px;
+}
+
+li {
+    line-height: 200%;
+    list-style: none;
 
 }
 
+#fivedayheader {
+    margin-left: 10px;
+}
+
 #fivedaylist {
+    margin-left: 5px;
     display: flex;
     flex-wrap: wrap;
 }
 
 #fivedaydiv {
-    margin: 5px;
-    padding: 5px;
-    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
     background-color: dodgerblue;
     color: white;
+}
+
+#fivedayheads {
+    display: flex;
+    align-items: center;
 }
 
 footer {
@@ -76,4 +118,5 @@ footer {
     bottom: 10px;
     width: 100%;
     text-align: center;
+    color: darkgrey;
 }

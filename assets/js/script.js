@@ -8,7 +8,8 @@ var historyListItem = '';
 var geocodingUrl = '';
 var weatherDataUrl = '';
 var weatherApiKey = '33de59ca489ef80bcfed5ff29e61912e';
-var currentWeatherIcon = '';
+var currentWeatherIconCode = '';
+var currentWeatherIconURL = '';
 var showCurrentData = '';
 var currentTemp = '';
 var currentWind = '';
@@ -16,9 +17,12 @@ var currentHumidity = '';
 var dailyTemp = [];
 var dailyWind = [];
 var dailyHumidity = [];
+var dailyWeatherIconCode = [];
+var dailyWeatherIconURL = [];
 var searchRun = false;
 var recentSearches = document.getElementById('recent-searches');
 var currentCitySection = document.getElementById('current-city');
+var currentCityHeader = document.getElementById('current-city-header');
 var fiveDayHeader = document.getElementById('fivedayheader');
 var fiveDayList = document.getElementById('fivedaylist');
 var date = dayjs().format('M/DD/YYYY');
@@ -94,13 +98,18 @@ function getAPIData() {
                     currentTemp = data.current.temp;
                     currentWind = data.current.wind_speed;
                     currentHumidity = data.current.humidity;
+                    currentWeatherIconCode = data.current.weather[0].icon;
+                    currentWeatherIconURL = 'https://openweathermap.org/img/wn/' + currentWeatherIconCode + '@2x.png';
+
 
                     //Forecasted weather data
                     dailyTemp = [data.daily[0].temp.day, data.daily[1].temp.day, data.daily[2].temp.day, data.daily[3].temp.day, data.daily[4].temp.day];
                     dailyWind = [data.daily[0].wind_speed, data.daily[1].wind_speed, data.daily[2].wind_speed, data.daily[3].wind_speed, data.daily[4].wind_speed];
                     dailyHumidity = [data.daily[0].humidity, data.daily[1].humidity, data.daily[2].humidity, data.daily[3].humidity, data.daily[4].humidity];
-
-                    // currentWeatherIcon = data.current.weather.icon; TODO (Undefined)
+                    dailyWeatherIconCode = [data.daily[0].weather.icon, data.daily[1].weather.icon, data.daily[2].weather.icon, data.daily[3].weather.icon, data.daily[4].weather.icon];
+                    dailyWeatherIconURL = ['https://openweathermap.org/img/wn/' + data.daily[0].weather[0].icon + '@2x.png', 'https://openweathermap.org/img/wn/' + data.daily[1].weather[0].icon + '@2x.png', 'https://openweathermap.org/img/wn/' + data.daily[2].weather[0].icon + '@2x.png', 'https://openweathermap.org/img/wn/' + data.daily[3].weather[0].icon + '@2x.png', 'https://openweathermap.org/img/wn/' + data.daily[4].weather[0].icon + '@2x.png'];
+                    
+                    //Display weather data on dashboard
                     showCurrentWeather();
 
                     //Save city to history Array
@@ -122,9 +131,14 @@ function getAPIData() {
 //Fill in current weather section with current weather conditions
 function showCurrentWeather() {
     //Current city heading with date & weather icon
-    var showCity = document.createElement('h3');
-    showCity.innerText = city + ' (' + date + ')' + currentWeatherIcon;
-    currentCitySection.appendChild(showCity);
+    var showCity = document.createElement('h2');
+    var showWeatherIcon = document.createElement('img');
+    showWeatherIcon.src = currentWeatherIconURL;
+    showWeatherIcon.id = 'weather-icon';
+    showCity.innerText = city + ' (' + date + ')';
+    currentCitySection.appendChild(currentCityHeader);
+    currentCityHeader.appendChild(showCity);
+    currentCityHeader.appendChild(showWeatherIcon);
 
     //Current city temp, wind, and humidity list
     showCurrentData = document.createElement('ul');
@@ -140,10 +154,32 @@ function showCurrentWeather() {
         for ( var i = 1; i < 6; i++) {
             var nextDate = dayjs().add([i], 'day').format('M/DD/YYYY');
             var fiveDayDiv = document.createElement('div');
-        fiveDayDiv.innerHTML = "<div id='fivedaydiv'><h3>" + nextDate + "</h3>\n<ul><li>Temp: " + dailyTemp[i-1] + "  \u00B0F</li>\n<li>Wind: " + dailyWind[i-1] + " MPH</li>\n<li>Humidity: " + dailyHumidity[i-1] + " %</li></ul></div>";
-        fiveDayList.appendChild(fiveDayDiv);
+            fiveDayDiv.id = 'fivedaydiv';
+            var fiveDayHeads = document.createElement('div');
+            fiveDayHeads.id = 'fivedayheads';
+
+            //Create fiveday divs with data
+            fiveDayHeads.innerHTML = "<h4>" + nextDate + "</h4>";
+            fiveDayDiv.appendChild(fiveDayHeads);
+            fiveDayList.appendChild(fiveDayDiv);
+
+            //Create and show forecast icon
+            var showForecastIcon = document.createElement('img');
+            showForecastIcon.src = dailyWeatherIconURL[i-1];
+            showForecastIcon.id = 'forecast-icon';
+            fiveDayHeads.appendChild(showForecastIcon);
+
+            //Add weather data for each forecasted day
+            var forecastData = document.createElement('p');
+            forecastData.innerHTML = "<p>Temp: " + dailyTemp[i-1] + "  \u00B0F<br />Wind: " + dailyWind[i-1] + " MPH<br />Humidity: " + dailyHumidity[i-1] + " %</p>";
+            fiveDayDiv.appendChild(forecastData);
+
+            
         }
 }
+
+// "<div id='fivedaydiv'><h4>" + nextDate + "</h4>" + showForecastIcon + "<br /><p>Temp: " + dailyTemp[i-1] + "  \u00B0F<br />Wind: " + dailyWind[i-1] + " MPH<br />Humidity: " + dailyHumidity[i-1] + " %</p></div>";
+//             fiveDayList.appendChild(fiveDayDiv);
 
 //Get recent cities from LocalStorage to display as recent search list
 function showSearchHistory() {
@@ -173,7 +209,6 @@ function showSearchHistory() {
     var buttons = document.getElementsByName("history-button");
     var buttonPressed = e => {
         city = e.target.id;
-        console.log(city);
         searchRun === true;
         getAPIData();
     }
