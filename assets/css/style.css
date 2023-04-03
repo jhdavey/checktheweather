@@ -1,3 +1,9 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
 header {
     padding: 5px;
 }
@@ -31,7 +37,6 @@ h4 {
 
 #search {
     margin: 5px 5px 0px 10px;
-    min-width: 200px;
 }
 
 #city {
@@ -119,4 +124,53 @@ footer {
     width: 100%;
     text-align: center;
     color: darkgrey;
+}
+
+/*Responsive mobile settings */
+@media only screen and (max-width: 950px) {
+    #main-content {
+        margin-left: 10px;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+
+    /*Shrink header size*/
+    body {
+        overflow: visible;
+    }
+
+    #main-wrapper {
+        display: block;
+    }
+
+    #search {
+        display: block;
+        width: 80%;
+        margin: auto;
+    }
+
+    #current-city, #current-city-header {
+        display: block;
+        text-align: center;
+    }
+
+    #fivedaylist {
+        display: block;
+        width: 50%;
+        margin: auto;
+        text-align: center;
+    }
+    #fivedayheads {
+        margin: auto;
+    }
+
+    h3 {
+        text-align: center;
+    }
+
+    li {
+        margin: auto;
+    }
+
 }
