@@ -32,6 +32,7 @@ function checkSearch() {
     if (searchRun === true) {
         recentSearches.replaceChildren('');
         currentCitySection.replaceChildren('');
+        currentCityHeader.replaceChildren('');
         fiveDayHeader.replaceChildren('');
         fiveDayList.replaceChildren('');
         showSearchHistory();
