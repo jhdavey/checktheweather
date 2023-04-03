@@ -10,7 +10,7 @@ Additionally once you've completed a search you will see you recent search histo
 
 Your page should be displayed as follows:
 
-![Weather Dashboard](/codingquizscreenshot1.png)
+![Weather Dashboard](./assets/images/checktheweatherscreenshot1.png)
 ## Description
 
 Simply enter the city you would like to view weather information for.

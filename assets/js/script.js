@@ -151,36 +151,31 @@ function showCurrentWeather() {
     fiveDayTitle.innerText = "5 Day Forecast";
     fiveDayHeader.appendChild(fiveDayTitle);
 
-        //Run loop to create 5 day forecast blocks
-        for ( var i = 1; i < 6; i++) {
-            var nextDate = dayjs().add([i], 'day').format('M/DD/YYYY');
-            var fiveDayDiv = document.createElement('div');
-            fiveDayDiv.id = 'fivedaydiv';
-            var fiveDayHeads = document.createElement('div');
-            fiveDayHeads.id = 'fivedayheads';
+    //Run loop to create 5 day forecast blocks
+    for ( var i = 1; i < 6; i++) {
+        var nextDate = dayjs().add([i], 'day').format('M/DD/YYYY');
+        var fiveDayDiv = document.createElement('div');
+        fiveDayDiv.id = 'fivedaydiv';
+        var fiveDayHeads = document.createElement('div');
+        fiveDayHeads.id = 'fivedayheads';
 
-            //Create fiveday divs with data
-            fiveDayHeads.innerHTML = "<h4>" + nextDate + "</h4>";
-            fiveDayDiv.appendChild(fiveDayHeads);
-            fiveDayList.appendChild(fiveDayDiv);
+        //Create fiveday divs with data
+        fiveDayHeads.innerHTML = "<h4>" + nextDate + "</h4>";
+        fiveDayDiv.appendChild(fiveDayHeads);
+        fiveDayList.appendChild(fiveDayDiv);
 
-            //Create and show forecast icon
-            var showForecastIcon = document.createElement('img');
-            showForecastIcon.src = dailyWeatherIconURL[i-1];
-            showForecastIcon.id = 'forecast-icon';
-            fiveDayHeads.appendChild(showForecastIcon);
+        //Create and show forecast icon
+        var showForecastIcon = document.createElement('img');
+        showForecastIcon.src = dailyWeatherIconURL[i-1];
+        showForecastIcon.id = 'forecast-icon';
+        fiveDayHeads.appendChild(showForecastIcon);
 
-            //Add weather data for each forecasted day
-            var forecastData = document.createElement('p');
-            forecastData.innerHTML = "<p>Temp: " + dailyTemp[i-1] + "  \u00B0F<br />Wind: " + dailyWind[i-1] + " MPH<br />Humidity: " + dailyHumidity[i-1] + " %</p>";
-            fiveDayDiv.appendChild(forecastData);
-
-            
-        }
+        //Add weather data for each forecasted day
+        var forecastData = document.createElement('p');
+        forecastData.innerHTML = "<p>Temp: " + dailyTemp[i-1] + "  \u00B0F<br />Wind: " + dailyWind[i-1] + " MPH<br />Humidity: " + dailyHumidity[i-1] + " %</p>";
+        fiveDayDiv.appendChild(forecastData);
+    }
 }
-
-// "<div id='fivedaydiv'><h4>" + nextDate + "</h4>" + showForecastIcon + "<br /><p>Temp: " + dailyTemp[i-1] + "  \u00B0F<br />Wind: " + dailyWind[i-1] + " MPH<br />Humidity: " + dailyHumidity[i-1] + " %</p></div>";
-//             fiveDayList.appendChild(fiveDayDiv);
 
 //Get recent cities from LocalStorage to display as recent search list
 function showSearchHistory() {
